@@ -1,0 +1,53 @@
+@model Statictis2ViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <h3>Thống kê log có thời gian thực thi ngắn nhất/dài nhất theo từng loại</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Log Type</th>
+                <th scope="col">Min Time Execute - Log Id</th>
+                <th scope="col">Max Time Execute - Log Id</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.MinMaxLogTypes)
+            {
+                <tr>
+                    <td>@item.LogType</td>
+                    <td>@item.MinTime - <a asp-action="Detail" asp-route-id=@item.MinLogId>@item.MinLogId</a></td>
+                    <td>@item.MaxTime - <a asp-action="Detail" asp-route-id=@item.MaxLogId>@item.MaxLogId</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br>
+    <br>
+    <h3>Thống kê log có thời gian thực thi ngắn nhất/dài nhất theo từng tài khoản</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">UserId</th>
+                <th scope="col">UserName</th>
+                <th scope="col">Min Time Execute - Log Id</th>
+                <th scope="col">Max Time Execute - Log Id</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.MinMaxLogAccounts)
+            {
+                <tr>
+                    <td>@item.UserId</td>
+                    <td>@item.UserName</td>
+                    <td>@item.MinTime - <a asp-action="Detail" asp-route-id=@item.MinLogId>@item.MinLogId</a></td>
+                    <td>@item.MaxTime - <a asp-action="Detail" asp-route-id=@item.MaxLogId>@item.MaxLogId</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

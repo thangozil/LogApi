@@ -1,0 +1,33 @@
+@model LogInfo
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <h1>LogInfo</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">LogId</th>
+                <th scope="col">StartTime</th>
+                <th scope="col">Description</th>
+                <th scope="col">Type</th>
+                <th scope="col">TimeExcecute</th>
+                <th scope="col">UserId</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Model.StartTime</td>
+                <td>@Model.Description</td>
+                <td>@Model.Type</td>
+                <td>@Model.TimeExcecute</td>
+                <td>@Model.UserId</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>

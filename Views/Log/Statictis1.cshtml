@@ -1,0 +1,116 @@
+@model Statictis1ViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <h3>Thống kê số lượng log mà một tài khoản gửi lên</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">UserId</th>
+                <th scope="col">UserName</th>
+                @foreach (var logType in Model.AllLogType)
+                {
+                    <th scope="col">@logType</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var userLogInfo in Model.UserLogInfos)
+            {
+                <tr>
+                    <td>@userLogInfo.UserId</td>
+                    <td>@userLogInfo.UserName</td>
+                    @foreach (var logCount in userLogInfo.LogTypeCount)
+                    {
+                        <td>@logCount</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br>
+
+    <canvas id="myChart1"></canvas>
+    <br>
+    <canvas id="myChart2"></canvas>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        var ctx = document.getElementById('myChart1').getContext('2d');
+        var labels = [];
+
+        @foreach (var type in Model.AllLogType)
+        {
+            @:labels.push("@type");
+        }
+
+        var data = [];
+        @foreach (var count in Model.TypeLogCount)
+        {
+            @:data.push("@count");
+        }
+
+
+
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Log Type Count',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: data
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+    </script>
+
+    <script type="text/javascript">
+        var ctx = document.getElementById('myChart2').getContext('2d');
+        var labels = [];
+
+        @foreach (var type in Model.AllUserName)
+        {
+            @:labels.push("@type");
+        }
+
+        var data = [];
+        @foreach (var count in Model.UserLogCount)
+        {
+            @:data.push("@count");
+        }
+
+
+
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'User Log Count',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: data
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+    </script>
+}
