@@ -1,6 +1,6 @@
 using System;
 
-namespace LogApi.Models
+namespace LogApi.ViewModels
 {
     public class ErrorViewModel
     {
